@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-5 col-sm-6">
-           <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Post</a>
+           <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Event</a>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
            <form method="POST">
                {% csrf_token %}
                <h5>Are you sure?</h5>
-               <p>You are going to delete this service/event, you cannot redone this.</p>
+               <p>You are going to delete this event, you cannot redone this.</p>
                <div class="d-grid gap-2">
                    <button class="btn btn-danger mt-3">DELETE</button>
                </div>

@@ -5,15 +5,16 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-md-5 col-sm-12 border-bottom">
-           <h5>Create an Event!</h5>
+           <h5>Create an Event or Service!</h5>
         </div>
     </div>
 
     <div class="row justify-content-center mt-3 mb-5">
         <div class="col-md-5 col-sm-12 border-bottom">
-           <form method="POST">
+           <form method="POST" enctype="mutlipart/form">
                {% csrf_token %}
                {{ form | crispy }}
+               
                <div class="d-grid gap-2">
                    <button class="btn btn-success mt-3">SUBMIT</button>
                </div>
@@ -25,9 +26,32 @@
         <div class="col-md-5 col-sm-12 border-bottom position-relative">
                 <p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }} </a> {{ post.created_on }}</p>
                 <div class="position-relative">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" class="post-image"/>
+                    {% endif %}
+                <p>{{post.body}}</p>    
                 <p>{{ post.body }}</p>
                 <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
              </div>
+             <div class="d-flex flex-row">
+                 <form method="POST" action="{% url 'like' post.pk  %}">
+                     {% csrf_token %}
+                     <input type="hidden" name="next" value="{{ request.path }}">
+                     <button style="background-color: transparent; border:none; box-shadow: none;" type="submit">
+                         <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span> </i>
+                     </button>
+                </form>    
+                
+            <div class="d-flex flex-row">
+                <form method="POST" action="{% url 'dislike' post.pk  %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border:none; box-shadow: none;" type="submit">
+                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                    </button>
+                </form> 
+            </div>
+        </div>     
     </div>
     {% endfor %}
 </div>

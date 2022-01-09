@@ -1,3 +1,4 @@
+
 from django import forms
 from .models import Post, Comment
 
@@ -5,23 +6,24 @@ class PostForm(forms.ModelForm):
     body = forms.CharField(
         label='',
         widget=forms.Textarea(attrs={
-            'rows':'3',
-            'placeholder': 'Describe your service or event here...'
-        })
-    )
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }))
+
+    image = forms.ImageField(required=False)
+    body = forms.CharField(required=True)
 
     class Meta:
         model = Post
-        fields = ['body']
+        fields = ['body', 'image']
 
 class CommentForm(forms.ModelForm):
     comment = forms.CharField(
         label='',
         widget=forms.Textarea(attrs={
-            'rows':'3',
-            'placeholder': 'Say something...'
-        })
-    )
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }))
 
     class Meta:
         model = Comment

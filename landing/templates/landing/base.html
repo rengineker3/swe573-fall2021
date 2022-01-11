@@ -1,23 +1,81 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" >
+    <link rel="stylesheet" href="{% static 'landing/main.css' %}">
+    {% if title %}
+        <title>Socialland{{title}}</title>
+    {% else %}
+        <title>Socialland</title>
+    {% endif %}
 
-    <!-- <script src="https://kit.fontawesome.com/1d71f92e0a.js" crossorigin="anonymous"></script> -->
-    <script src="https://kit.fontawesome.com/42deadbeef.js" crossorigin="anonymous"></script>
-    <title>Socialland</title>
-  </head>
-  <body style="background-color:#e6e7e9">
-    {% include 'landing/navbar.html' %}
+</head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand font-weight-bold" href="{% url 'home' %}"><i class="fas fa-users"></i>Socialland</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
+                   
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                    
+                  </ul>
+              
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'user-posts' user %}" class="btn text-white m-2"><i class="fas fa-hands-helping"></i> My Services/Events</a>
+                    <a href="{% url 'post-create' %} " class="btn text-white m-2"><i class="fas fa-calendar-alt"></i> New Service/Event</a>
+                    <a href="{% url 'profile' %} " class="btn text-white m-2"><i class="fas fa-user"></i> {{ user.username }}</a>
+                    <a href="{% url 'logout' %} " class="btn text-white m-2"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    
+                    {% else %}
+                    <a href="{% url 'login' %} " class="btn text-white m-2"><i class="fas fa-user-tie"></i> Log In</a>
+                   
+                    <a href="{% url 'register' %} " class="btn text-white m-2"> <i class="fas fa-sign-in-alt"></i> Sign Up</a>
+                    {% endif %}
+                  
+                </div>
+              </nav>
+      <div class="container my-bg">
+        {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+          {% endfor %}
+        {% endif %}
     {% block content %}
-    {% endblock content %}
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      
+    {% endblock  %}
+</div> 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{% static 'landing/main.js' %}"></script>
   </body>
 </html>

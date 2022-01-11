@@ -49,12 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'landing',
-    'social',
+    'landing.apps.BlogConfig',
+    'users.apps.UsersConfig',
     'crispy_forms',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+ 
 
 ]
 
@@ -142,10 +143,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL='post-list' 
+LOGIN_REDIRECT_URL='home' 
 ACCOUNT_EMAIL_REQUIRED = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

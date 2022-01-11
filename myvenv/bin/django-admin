@@ -1,4 +1,4 @@
-#!/Users/ulkueker/Socialland/Socialland/myvenv/bin/python3
+#!/Users/ulkueker/Downloads/Django-Blog-master/myvenv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

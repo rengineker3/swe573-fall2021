@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Post
+from .models import Service
     
 
-admin.site.register(Post)
+admin.site.register(Service)
 

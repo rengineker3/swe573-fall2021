@@ -8,50 +8,50 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
+from .models import Service
 
 
 def home(request):
     context = {
-        'posts': Post.objects.all()
+        'services': Service.objects.all()
     }
     return render(request, 'landing/home.html', context)
 
 
-class PostListView(ListView):
-    model = Post
+class ServiceListView(ListView):
+    model = Service
     template_name = 'landing/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
+    context_object_name = 'services'
     ordering = ['-date_posted']
     paginate_by = 2
 
 
-class UserPostListView(ListView):
-    model = Post
-    template_name = 'landing/user_posts.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
+class UserServiceListView(ListView):
+    model = Service
+    template_name = 'landing/user_services.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'services'
     paginate_by = 2
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return Service.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(DetailView):
-    model = Post
+class ServiceDetailView(DetailView):
+    model = Service
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['title', 'content']
+class ServiceCreateView(LoginRequiredMixin, CreateView):
+    model = Service
+    fields = ['title', 'content','date_posted', 'author', 'picture', 'servicedate', 'duration', 'capacity' ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Post
+class ServiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Service
     fields = ['title', 'content']
 
     def form_valid(self, form):
@@ -59,19 +59,19 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        service = self.get_object()
+        if self.request.user == service.author:
             return True
         return False
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Post
+class ServiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Service
     success_url = '/'
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        service = self.get_object()
+        if self.request.user == service.author:
             return True
         return False
 

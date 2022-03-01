@@ -30,7 +30,7 @@ class ServiceListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 2
     currentTime = timezone.now()
-   
+
 
 
 class UserServiceListView(ListView):

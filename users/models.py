@@ -13,10 +13,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True, null=True)
     occupation = models.TextField(max_length=30, blank=True, null=True)
     birth_date = models.DateTimeField(null=True, blank=True)
-    followers = models.ManyToManyField(User, blank=True, related_name='followers')
-    credithour = models.IntegerField(default=5)
-    reservehour = models.IntegerField(default=0)
-    unreadcount = models.IntegerField(default=0)
+   
 
     
 

@@ -9,7 +9,31 @@
               <small class="text-muted">{{ service.date_posted|date:"F d, Y" }}</small>
             </div>
             <h2><a class="service-title" href="{% url 'service-detail' service.id %}">{{ service.title }}</a></h2>
-            <p class="service-content">{{ service.content }}</p>
+            <p class="service-content">Content:{{ service.content }}</p>
+            <p class="service-duration">Duration:{{ service.duration }}</p>
+            <p class="service-capacity">Capacity:{{ service.capacity }}</p>
+            <button class="btn btn-outline-info" type="submit">Apply</button>
+            </div>
+            <div class="col-md-4">
+              <img style="border-radius:10px;" src="{{ service.image.url }}" width="100" height="100" />
+          </div>
+        </article>
+    {% endfor %}
+    {% for event in events %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ event.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'user-events' event.author.username %}">{{ event.author }}</a>
+              <small class="text-muted">{{ event.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="event-title" href="{% url 'event-detail' event.id %}">{{ event.title }}</a></h2>
+            <p class="service-content">Content:{{ event.content }}</p>
+            <p class="service-duration">Duration:{{ event.duration }}</p>
+            <button class="btn btn-outline-info" type="submit">Apply</button>
+            </div>
+            <div class="col-md-4">
+              <img style="border-radius:10px;" src="{{ event.image.url }}" width="100" height="100" />
           </div>
         </article>
     {% endfor %}

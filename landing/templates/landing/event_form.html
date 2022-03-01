@@ -3,7 +3,8 @@
 {% block content %}
 
     <div class="content-section">
-        <form method="POST">{% csrf_token %}
+        <form method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Events</legend>
                 {{ form|crispy }}

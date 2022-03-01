@@ -61,18 +61,10 @@ class UserUpdateForm(forms.ModelForm):
         })
     )
 
-    chronical_disease = forms.BooleanField(
-        label = 'Chronical Disease'
-    )
-
-    birth_date = DateTimeLocalField(
-        label = 'Birthdate',
-        validators=[validate_date_after],
-    )
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'bio', 'occupation', 'chronical_disease', 'birth_date']
+        fields = ['email', 'name', 'bio', 'occupation']
     
 
 

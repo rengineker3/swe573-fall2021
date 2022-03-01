@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
-from taggit.models import Tag
+
 
 
 def register(request):
@@ -20,7 +20,7 @@ def register(request):
 
 
 @login_required
-def profile(request, tag_slug=None):   
+def profile(request):   
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -40,8 +40,6 @@ def profile(request, tag_slug=None):
         'u_form': u_form,
         'p_form': p_form
     }
-    tag=None
-    if tag_slug:
-        tag=get_object_or_404(Tag, slug=tag_slug) 
-
+ 
     return render(request, 'users/profile.html',context)
+    

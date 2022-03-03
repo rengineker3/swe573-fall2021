@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
 from django.utils import timezone
 from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView,
-    View
+    DeleteView
 )
 
 from landing.forms import ServiceForm, EventForm
@@ -41,7 +40,7 @@ class UserServiceListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Service.objects.filter(author=user).order_by('-date_posted')
+        return Service.objects.filter(organizer=user).order_by('-date_posted')
 
 
 class ServiceDetailView(DetailView):
@@ -50,27 +49,23 @@ class ServiceDetailView(DetailView):
 
 class ServiceCreateView(LoginRequiredMixin, CreateView):
     model = Service
-    fields = ['title', 'content','date_posted', 'author', 'image', 'servicedate', 'duration', 'capacity' ]
+    fields = ['title', 'content','date_posted', 'organizer', 'image', 'servicedate', 'duration', 'capacity' ]
 
     def form_valid(self, form):
-        form = ServiceForm
-        image = form.cleaned_data.get("image")
-       
-        form.instance.author = self.request.user
         return super().form_valid(form)
 
 
 class ServiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Service
-    fields = ['title', 'content','date_posted', 'author', 'image', 'servicedate', 'duration', 'capacity']
+    fields = ['title', 'content','date_posted', 'organizer', 'image', 'servicedate', 'duration', 'capacity']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form = ServiceForm
         return super().form_valid(form)
 
     def test_func(self):
         service = self.get_object()
-        if self.request.user == service.author:
+        if self.request.user == service.organizer:
             return True
         return False
 
@@ -79,9 +74,10 @@ class ServiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Service
     success_url = '/'
 
+
     def test_func(self):
         service = self.get_object()
-        if self.request.user == service.author:
+        if self.request.user == service.organizer:
             return True
         return False
 
@@ -92,12 +88,14 @@ def about(request):
 
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
-    fields = ['title', 'content','date_posted', 'organizer', 'image', 'eventdate' ]
+    fields = ['eventtitle', 'eventcontent','eventdate_posted', 'organizer', 'eventimage', 'eventdate' ]
 
     def form_valid(self, form):
         form = EventForm
-        form.instance.author = self.request.user
-        return super().form_valid(form)    
+       
+        EventForm.instance.organizer = self.request.user
+        return super().form_valid(form)
+ 
 
 class EventDetailView(DetailView):
     model = Event
@@ -120,20 +118,22 @@ class UserEventListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Event.objects.filter(author=user).order_by('-date_posted')
+        return Event.objects.filter(organizer=user).order_by('-date_posted')
 
     
 class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
-    fields = ['title', 'content','date_posted', 'organizer', 'image', 'eventdate']
+    fields = ['eventtitle', 'eventcontent','eventdate_posted', 'organizer', 'eventimage', 'eventdate']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form = EventForm
+       
+        EventForm.instance.organizer = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
         event = self.get_object()
-        if self.request.user == event.author:
+        if self.request.user == event.organizer:
             return True
         return False
 

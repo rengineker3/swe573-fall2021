@@ -35,7 +35,9 @@ class DateTimeLocalField(forms.DateTimeField):
 
 
 class UserUpdateForm(forms.ModelForm):
+    
     email = forms.EmailField()
+    label = 'E-mail'
     
     name = forms.CharField(
         label = 'Name',

@@ -4,20 +4,20 @@
     <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="{% url 'user-services' object.author.username %}">{{ object.author }}</a>
+        <a class="mr-2" href="{% url 'user-events' object.author.username %}">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         {% if object.author == user %}
           <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'service-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'service-delete' object.id %}">Delete</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'event-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'event-delete' object.id %}">Delete</a>
           </div>
         {% endif %}
       </div>
       <h2 class="article-title">{{ object.title }}</h2>
       <p class="article-content">Content:{{ object.content }}</p>
-      <p class="service-duration">Duration:{{ service.duration }}</p>
-      <p class="service-capacity">Capacity:{{ service.capacity }}</p>
-      <p class="service-photo">Photo: <img class="rounded-circle article-img" src="{{ service.image.url }}">{{ service.photo }}</p>
+      <p class="event-duration">Duration:{{ event.eventduration }}</p>
+      <p class="event-capacity">Capacity:{{ event.eventcapacity }}</p>
+      <p class="event-photo">Photo: <img class="rounded-circle article-img" src="{{ event.eventimage.url }}">{{ event.image }}</p>
       <div class="form-group">
         <button class="btn btn-outline-info" type="submit">Apply</button>
       </div>

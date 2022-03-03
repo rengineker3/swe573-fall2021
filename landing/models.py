@@ -10,8 +10,8 @@ class Service(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='service_pics')
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(default= 'service_pics/default.png',upload_to='service_pics')
     servicedate = models.DateTimeField(default=timezone.now)
     duration = models.IntegerField(default=1)
     capacity = models.IntegerField(default=1)
@@ -26,15 +26,14 @@ class Service(models.Model):
     def save(self, *args, **kwargs):
         super(Service, self).save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
 
     
 class Event(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='event_pics')
+    eventtitle = models.CharField(max_length=100)
+    eventcontent = models.TextField()
+    eventdate_posted = models.DateTimeField(default=timezone.now)
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(default= 'event_pics/default.png', upload_to='event_pics')
     eventdate = models.DateTimeField(default=timezone.now)
  
 
@@ -46,13 +45,7 @@ class Event(models.Model):
         return reverse('event-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        super(Event, self).save(*args, **kwargs)
-
-        img = Image.open(self.image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (500, 500)
-            img.save(self.image.path)       
+        super(Event, self).save(*args, **kwargs)   
 
 
 

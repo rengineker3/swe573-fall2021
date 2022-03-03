@@ -1,5 +1,5 @@
 from django import forms
-from .models import Service
+from .models import Service, Event
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
@@ -55,14 +55,14 @@ class ServiceForm(forms.ModelForm):
         fields = ['image']
 
 class EventForm(forms.ModelForm):
-    title = forms.CharField(
+    eventtitle = forms.CharField(
         widget = forms.Textarea(attrs={
             'rows': '1',
             'placeholder': 'Give your service a title'
         })
     )
 
-    content= forms.CharField(
+    eventcontent= forms.CharField(
         widget = forms.Textarea(attrs={
             'rows': '3',
             'placeholder': 'Give your service an explanation'
@@ -74,7 +74,7 @@ class EventForm(forms.ModelForm):
         validators=[validate_date],
     )
 
-    image = forms.ImageField()
+    eventimage = forms.ImageField()
 
     class Meta:
         model = Service

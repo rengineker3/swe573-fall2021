@@ -1,3 +1,13 @@
-users/_pycache_
+users/_pycache_/
+main.css
+main.js
 .vscode
-migrations
+landing/migrations
+profile_pics
+landing/static
+
+#virtual env related
+bin/
+lib/
+pyvenv.cfg
+

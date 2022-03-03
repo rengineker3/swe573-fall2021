@@ -1,2 +1,3 @@
-landing/myvenv
-landing/static 
+users/_pycache_
+.vscode
+migrations

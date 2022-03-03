@@ -6,6 +6,10 @@ from django.db.models.signals import post_save
 from django.core.exceptions import ValidationError
 from PIL import Image
 
+def validate_date(date):
+    if date < timezone.now():
+        raise ValidationError("Date cannot be in the past.")
+
 class Service(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

@@ -12,7 +12,6 @@ class Profile(models.Model):
     image = models.ImageField(default='uploads/default.jpg', upload_to='profile_pics')
     bio = models.TextField(max_length=500, blank=True, null=True)
     occupation = models.TextField(max_length=30, blank=True, null=True)
-    birth_date = models.DateTimeField(null=True, blank=True)
    
 
     

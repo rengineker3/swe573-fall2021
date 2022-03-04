@@ -39,6 +39,6 @@ http://127.0.0.1:8000/
 3. [Service Update Page][https://ibb.co/CHG5xZN]
 4. [Profile Page][https://ibb.co/JjCswZn]
 5. [Profile Edit Page][https://ibb.co/rvJvGM9]
-6. [Service/Event Delete Page][https://i.ibb.co/QFBwMKF/Ekran-Resmi-2022-03-04-06-37-23.png]
+6. [Service/Event Delete Page][<a href="https://ibb.co/WW9Jf2W"><img src="https://i.ibb.co/QFBwMKF/Ekran-Resmi-2022-03-04-06-37-23.png" alt="Ekran-Resmi-2022-03-04-06-37-23" border="0"></a>]
 
 

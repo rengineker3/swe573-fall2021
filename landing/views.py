@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User 
 from django.utils import timezone
@@ -7,7 +7,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 
 from landing.forms import ServiceForm, EventForm
@@ -45,7 +45,19 @@ class UserServiceListView(ListView):
 
 class ServiceDetailView(DetailView):
     model = Service
+    
+class ServiceApplyView(DetailView):
+    model = Service
+    
+    def service_add_attendance(request, pk):
+        this_service = Service.objects.get(pk=pk)
+        this_service.add_user_to_list_of_attendees(user=request.user)
+        return redirect('service-detail', pk=pk)
 
+    def service_cancel_attendance(request, pk):
+        this_service = Service.objects.get(pk=pk)
+        this_service.remove_user_from_list_of_attendees(request.user)
+        return redirect('service-detail', pk=pk)
 
 class ServiceCreateView(LoginRequiredMixin, CreateView):
     model = Service

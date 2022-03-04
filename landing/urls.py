@@ -17,6 +17,7 @@ from .views import (
     EventDetailView,
     EventUpdateView, 
     EventDeleteView,
+    ServiceApplyView
     
 )
 from . import views

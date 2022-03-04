@@ -17,7 +17,7 @@
       <p class="article-content">Content:{{ object.content }}</p>
       <p class="service-duration">Duration:{{ service.duration }}</p>
       <p class="service-capacity">Capacity:{{ service.capacity }}</p>
-      <p class="service-photo">Photo: <img class="rounded-circle article-img" src="{{ service.image.url }}">{{ service.photo }}</p>
+      <p class="service-photo">Photo: <img style="border-radius:2px;" src="{{ service.image.url }}" width="200" height="200" />
       <div class="form-group">
         <button class="btn btn-outline-info" type="submit">Apply</button>
       </div>

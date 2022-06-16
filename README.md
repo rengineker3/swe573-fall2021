@@ -42,3 +42,4 @@ http://127.0.0.1:8000/
 6. [Service/Event Delete Page][https://ibb.co/WW9Jf2W]
 
 
+# 573-mid

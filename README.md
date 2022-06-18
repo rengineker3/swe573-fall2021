@@ -4,7 +4,6 @@
 
 1. Clone the repo. Which is: 
 
-```sh
 $ git clone https://github.com/rengineker3/swe573-fall2021.git
 
 * Project needs postgresql and docker. 
@@ -29,7 +28,7 @@ $ git clone https://github.com/rengineker3/swe573-fall2021.git
 ### Screen Shots of The Website
 
 1. [Home Page](https://ibb.co/QKpVBfz)
-2. [Service/Event Update and Delete Page](https://ibb.co/NVJSRCs)
+2. [Service/Event Update and Delete Page] (https://ibb.co/NVJSRCs)
 3. [Service Update Page](https://ibb.co/CHG5xZN)
 4. [Profile Page](https://ibb.co/JjCswZn)
 5. [Profile Edit Page](https://ibb.co/rvJvGM9)

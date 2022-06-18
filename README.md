@@ -8,14 +8,14 @@
 
 * Project needs postgresql and docker. 
 * Start with create your virtual environment with:
-`python3 -m venv myvenv`
+`python3 -m venv myvenv`  
 `source myvenv/bin/activate`  
 * Install: `pip install -r requirements.txt`
 * Create Database: 
-`docker-compose up --build`
-`docker-compose start db` 
-`docker exec -it core_db bash`
-`psql -U postgres`
+`docker-compose up --build`  
+`docker-compose start db`  
+`docker exec -it core_db bash`  
+`psql -U postgres`  
 `CREATE DATABASE learningland;`  
 `/l`  (to check if the database is created).
 

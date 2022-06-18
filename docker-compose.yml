@@ -1,0 +1,32 @@
+version: '3.8'
+ 
+services:
+  
+  web:
+   container_name: core_Socialland
+   build: .
+   restart: always
+   env_file: ./Socialland/.env
+ 
+   volumes:
+     - .:/Socialland
+     - static_volume:/Socialland/static
+   depends_on:
+     - db   
+   ports:
+     - 80:8000
+
+  db:
+    container_name: core_db
+    image: postgres:14.1-alpine
+    env_file:  ./Socialland/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+     - 5434:5432
+  
+
+volumes:
+  static_volume:
+  postgres_data:
+  nginx_secrets:

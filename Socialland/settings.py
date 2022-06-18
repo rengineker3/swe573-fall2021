@@ -10,26 +10,32 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from pathlib import Path
+from environ import Env
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = Env()
+env.read_env(env_file='Socialland/.env')
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*(zpxw_by$a@e)$%2pcw(re2l*+w1qe2r#s@k9o##a^kkry!1h'
+SECRET_KEY = env('DJANGO_SECRET_KEY', default = '@cn9_$d%gy=p1ebh#71_%h&r+6*(#ev_)+kag#b5ekl@_af2#')   
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJANGO_DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
-# Application definition
+
 
 AUTHENTICATION_BACKENDS = [
      # Needed to login by username in Django admin, regardless of `allauth`
@@ -76,7 +82,7 @@ ROOT_URLCONF = 'Socialland.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,12 +101,30 @@ WSGI_APPLICATION = 'Socialland.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#       'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'Socialland', 
+#         'USER': 'postgres', 
+#         'PASSWORD': 'WakeUpLove03.55',
+#         'HOST': 'localhost', 
+#         'PORT': '5433',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+      'default': {
+        'ENGINE': env('DB_ENGINE', default = 'django.db.backends.postgresql_psycopg2'),
+        'NAME': env('DB_NAME', default='Socialland'), 
+        'USER': env('DB_USER', default='postgres'), 
+        'PASSWORD': env('DB_PASSWORD', default='WakeUpLove03.55'),
+        'HOST': env('DB_HOST', default='127.0.0.1'), 
+        'PORT': env('DB_PORT', default='5433'),
     }
 }
+
+
 
 
 # Password validation
@@ -130,8 +154,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
